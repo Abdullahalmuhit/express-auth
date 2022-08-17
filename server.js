@@ -2,9 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 const db = require("./app/models");
-
 const Role = db.role;
+var bodyParser = require('body-parser');
+
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
 app.use(cors());
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
