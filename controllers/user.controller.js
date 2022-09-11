@@ -10,6 +10,10 @@ var session = require('express-session')
 exports.allAccess = (req, res) => {
     res.status(200).send("Public Content.");
   };
+
+  exports.bladeUser = (req, res) => {
+    res.status(200).send("Muhit");
+  };
 exports.userBoard = async (req, res) => {
 
     try {

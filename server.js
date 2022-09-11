@@ -4,6 +4,10 @@ const cookieSession = require("cookie-session");
 const db = require("./app/models");
 const Role = db.role;
 var bodyParser = require('body-parser');
+const controller = require("./controllers/user.controller");
+const path = require("path");
+
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -47,9 +51,15 @@ app.use(
 //   }
   
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to abdullah al muhid application." });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to abdullah al muhid application." });
+// });
+app.get("/", controller.bladeUser);
+
+// app.get("/", (req, res) => {
+//  res.sendFile(path.join(__dirname, "html", "index.html"));
+// });
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
