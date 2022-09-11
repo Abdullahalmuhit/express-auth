@@ -4,7 +4,10 @@ const config = require("../app/config/auth.config");
 const db = require("../app/models");
 const User = db.user;
 verifyToken = (req, res, next) => {
-  let token = req.session.token;
+  console.log('muhit token', req.body.token)
+
+  let token = req.body.token;
+  console.log('token', token)
   if (!token) {
     return res.status(403).send({
       message: "No token provided!",
