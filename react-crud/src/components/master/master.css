@@ -1,0 +1,36 @@
+.form{
+    text-align: center;
+    margin-top: 100px;
+    padding-left: 100px;
+}
+
+.main.container {
+    margin-top: 60px;
+  }
+  
+  .submit-button {
+    margin-top: 24px !important;
+  }
+  
+  .data {
+    margin-top: 15px;
+  }
+  
+  thead tr th {
+    background: #e0e0e0 !important;
+  }
+  
+  .ui.inverted.dimmer {
+    background-color: rgba(255, 255, 255, 0) !important;
+  }
+  .bcColor {
+    background: #e0e0e0 !important;
+
+  }
+
+.field{
+    margin-top: 10px;
+    text-align: center;
+    background-color: #ffffff00 !important;
+
+}
