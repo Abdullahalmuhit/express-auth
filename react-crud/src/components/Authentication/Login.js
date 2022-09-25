@@ -35,49 +35,9 @@ export default class Login extends Component{
         let form = this.state.form;
         form[name]=value;
         this.setState({form});
-        console.log('username', this.state.form.username)
-        console.log('password', this.state.form.password)
-
+    
     };
-    // onFormSubmit = (event) => {
-        
-    //     event.preventDefault();
-    //     this.props.onFormSubmit(this.state.form);
-    //     this.clearFormFields();
-    //     this.setState({
-    //         btnName:"Log In",
-    //             btnClass: "ui primary button submit-button"
-
-    //     })
-    // };
-
-//     onFormSubmit = async (e) => {
-//     const history = useNavigate();
-//     e.preventDefault();
-//     const res = await axios.post(
-//       "http://localhost:8080/api/auth/signin",{
-//         method: "POST",
-//         body:{
-//             username:this.state.form.username,
-//             password:this.state.form.password
-
-//         }
-//       }
-//     );
-//     if (res.data.status === 200) {
-//          console.log('successfull')
-//          this.clearFormFields();
-//             this.setState({
-//                 btnName:"Log In",
-//                     btnClass: "ui primary button submit-button"
-
-//             })
-//     }
-//     else{
-//         console.log('something error');
-//     }
-//   };
-
+    
     onFormSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -86,7 +46,10 @@ export default class Login extends Component{
             password:this.state.form.password
       });
       if (res.status === 200) {
-        console.log('successfull', res.data)
+        console.log('successfull data', res.data)
+        localStorage.setItem('token', res.data.token);
+        console.log('token   :',localStorage.getItem('token'))
+
          this.clearFormFields();
             this.setState({
                 btnName:"Log In",
