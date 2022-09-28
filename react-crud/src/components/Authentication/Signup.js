@@ -4,14 +4,16 @@ import axios from "axios";
 import { Link,  Navigate,  useNavigate } from "react-router-dom";
 
 
-export default class Login extends Component{
+export default class Signup extends Component{
     state = {
         form:{
             password: '',
             username: '',
+            email: '',
+            roles:["moderator", "user"],
             isEdit: false
         },
-        btnName:"Log In",
+        btnName:"Sign Up",
         btnClass: "ui primary button submit-button"
     }
     isEmpty(obj){
@@ -41,9 +43,11 @@ export default class Login extends Component{
     onFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await axios.post("http://localhost:8080/api/auth/signin", {
+      let res = await axios.post("http://localhost:8080/api/auth/signup", {
             username:this.state.form.username,
-            password:this.state.form.password
+            password:this.state.form.password,
+            email:this.state.form.email,
+            roles:this.state.form.roles
       });
       if (res.status === 200) {
         console.log('successfull data', res.data)
@@ -68,7 +72,7 @@ export default class Login extends Component{
 
     clearFormFields = ()=>{
         this.setState({
-            form:{password:"", username:"", isEdit: false}
+            form:{password:"",email:"",roles:[''], username:"", isEdit: false}
 
         });
         document.querySelector(".form").reset();
@@ -83,6 +87,10 @@ export default class Login extends Component{
             alert("Enter username");
             return false;
         }
+        if(document.getElementsByName("email")[0].value === ''){
+            alert("Enter email");
+            return false;
+        }
        
     };
     
@@ -93,7 +101,7 @@ export default class Login extends Component{
                 <form className="ui form">
                     <div className="fields">
                         <div className="four wide field">
-                            <label>User Name</label>
+                            <label>User Name </label>
                             <input
                             type="text"
                             name="username"
@@ -105,7 +113,19 @@ export default class Login extends Component{
                             
                         </div>
                         <div className="four wide field">
-                            <label>Password</label>
+                            <label>User Email </label>
+                            <input
+                            type="email"
+                            name="email"
+                            placeholder="muhit@gmail.com"
+                            onChange={this.handleChange}
+                            value={this.state.form.email}
+                            
+                            />
+                            
+                        </div>
+                        <div className="four wide field">
+                            <label>Password </label>
                             <input
                                 type="password"
                                 name="password"
