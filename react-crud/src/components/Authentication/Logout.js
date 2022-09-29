@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
-const Logout=()=>{
+
+const Logout = ()=> {
+
+    var loggedInUser = localStorage.getItem('token');
+    const refreshPage = () => {
+         window.location.reload(false);
+        }
+     
     const logout = async (e)=>{
         try {
             let res = await axios.post("http://localhost:8080/api/auth/signout");
@@ -9,6 +17,7 @@ const Logout=()=>{
                 console.log('successfull logout', res.data)
                 sessionStorage.removeItem('token');
                 localStorage.clear();
+                refreshPage()
                 
             } else {
                 console.log('something error');
@@ -19,13 +28,13 @@ const Logout=()=>{
   
     };
     logout();
-    
-    return(
-        <div>
-            <h1>successfull logout</h1>
-        </div>
 
-    );
+     if (!loggedInUser) {
+            return <Navigate replace to="/login" />;
+        }
+        else{
+            return <Navigate replace to="/dashboard" />;
+        }
 
 };
 export default Logout;

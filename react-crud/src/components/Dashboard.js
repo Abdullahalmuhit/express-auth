@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
 import { Navigate } from "react-router-dom";
+import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import Logout from './Authentication/Logout';
+
 
 export default class Dashboard extends Component{
 
@@ -17,6 +20,9 @@ export default class Dashboard extends Component{
         return(
             <div>
                 <h1>Welcome to your Dashboard</h1>
+                <Link to={"/logout"} className="btn btn-primary btn-sm">
+                  Logout
+                </Link>         
             </div>
             );
 

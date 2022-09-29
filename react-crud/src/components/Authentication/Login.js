@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import '../master/master.css'
 import axios from "axios";
-
-
-
-
+import { Navigate, useRouteLoaderData } from "react-router-dom";
 export default class Login extends Component{
-    
+
     state = {
         form:{
             password: '',
@@ -14,11 +11,15 @@ export default class Login extends Component{
             isEdit: false
         },
         btnName:"Log In",
-        btnClass: "ui primary button submit-button"
+        btnClass: "ui primary button submit-button",
+        loggedInUser : localStorage.getItem("token")
     }
     isEmpty(obj){
         return Object.entries(obj).length === 0 && obj.constructor === Object;
     }
+    refreshPage() {
+         window.location.reload(false);
+        }
    
    
     componentDidUpdate(prevProps){
@@ -50,16 +51,14 @@ export default class Login extends Component{
       });
       if (res.status === 200) {
         console.log('successfull data', res.data)
-        localStorage.setItem('token', res.data.token);
+        this.state.loggedInUser = localStorage.setItem('token', res.data.token);
         console.log('token   :',localStorage.getItem('token'))
-
          this.clearFormFields();
             this.setState({
                 btnName:"Log In",
                     btnClass: "ui primary button submit-button"
-
-            });                     
-        
+            }); 
+            this.refreshPage();
       } else {
         console.log('something error');
       }
@@ -89,7 +88,11 @@ export default class Login extends Component{
     };
     
     render() {
-        
+        if (this.state.loggedInUser) {
+            return <Navigate replace to="/dashboard" />;
+        }
+        else{
+
         return(
            
                 <form className="ui form">
@@ -129,6 +132,7 @@ export default class Login extends Component{
            
 
         );
+        }
          
     }
 }
