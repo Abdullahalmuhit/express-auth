@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import '../master/master.css'
 import axios from "axios";
-import { Link,  Navigate,  useNavigate } from "react-router-dom";
+
+
 
 
 export default class Login extends Component{
+    
     state = {
         form:{
             password: '',
@@ -40,6 +42,7 @@ export default class Login extends Component{
     
     onFormSubmit = async (e) => {
     e.preventDefault();
+
     try {
       let res = await axios.post("http://localhost:8080/api/auth/signin", {
             username:this.state.form.username,
@@ -55,8 +58,7 @@ export default class Login extends Component{
                 btnName:"Log In",
                     btnClass: "ui primary button submit-button"
 
-            });
-             return <Navigate replace to="/dashboard" />;
+            });                     
         
       } else {
         console.log('something error');
