@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import Login from "./components/Authentication/Login";
 import Dashboard from './components/Dashboard';
 import Signup from './components/Authentication/Signup';
+import Logout from './components/Authentication/Logout';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                  <Route path="/signup" element={<Signup />} />
                  <Route path="/dashboard" element={<Dashboard />} />
+                 <Route path="/logout" element={<Logout />} />
+
               </Routes>
             </div>
         </Router>
